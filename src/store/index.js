@@ -10,7 +10,7 @@ export default new Vuex.Store({
         showModal: false,
         newItem: {
             name: '',
-            email: ''
+            phone: ''
         }
     },
     mutations: {
@@ -28,7 +28,7 @@ export default new Vuex.Store({
     actions: {
         addItem({ commit, state }) {
             commit('addItem', { ...state.newItem })
-            commit('setNewItem', { name: '', email: '' })
+            commit('setNewItem', { name: '', phone: '' })
             commit('setShowModal', false)
         }
     }

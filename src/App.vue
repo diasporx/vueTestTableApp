@@ -2,7 +2,7 @@
   <div id="app">
     <div class="container">
       <custom-button @click="showModal = true" class="mb-3">
-        Add Item
+        Добавить пользователя
       </custom-button>
       <Table />
       <Modal />
@@ -11,6 +11,7 @@
 </template>
 
 <script>
+// Components
 import Table from './components/__include/TableComponent.vue'
 import Modal from './components/__include/Modal.vue'
 
@@ -74,10 +75,15 @@ export default {
 
 .container {
   min-width: 768px;
+  padding: 70px 0;
 }
 
 .justify-content-end {
   justify-content: flex-end;
+}
+
+.justify-content-between {
+  justify-content: space-between;
 }
 
 .flex-column {
@@ -91,6 +97,7 @@ export default {
 .mb-1 {
   margin-bottom: 10px;
 }
+
 .me-1 {
   margin-right: 10px;
 }
@@ -109,4 +116,5 @@ input {
   border: none;
   background-color: #e9e9ed;
   outline: none !important;
-}</style>
+}
+</style>

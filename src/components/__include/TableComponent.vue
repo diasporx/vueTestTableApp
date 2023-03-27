@@ -2,14 +2,14 @@
     <table>
         <thead>
             <tr class="darked">
-                <th>Name</th>
-                <th>Email</th>
+                <th>Имя</th>
+                <th>Телефон</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="(item, index) in items" :key="index">
                 <td>{{ item.name }}</td>
-                <td>{{ item.email }}</td>
+                <td>{{ item.phone }}</td>
             </tr>
         </tbody>
     </table>

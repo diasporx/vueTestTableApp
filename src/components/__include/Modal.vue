@@ -4,10 +4,14 @@
             <div class="modal-content">
                 <h1 class="mb-2">Add Item</h1>
                 <div class="d-flex flex-column mb-1">
-                    <input class="mb-1" v-model="newItem.name" type="text" placeholder="NickName">
-                    <input v-model="newItem.email" type="email" placeholder="Email">
+                    <input class="mb-1" v-model="newItem.name" type="text" placeholder="Имя">
+                    <input v-model="newItem.phone" type="tel" placeholder="Телефон (+7)">
+                    <!-- <select v-model="newItem.parent">
+                        <option value="">Select parent</option>
+                        <option v-for="(item, index) in items" :key="index" :value="item.name">{{ item.name }}</option>
+                    </select> -->
                 </div>
-                <div class="d-flex justify-content-end">
+                <div class="d-flex justify-content-between">
                     <customButton @click="addItem" class="me-1">Save</customButton>
                     <customButton @click="closeModal">Cancel</customButton>
                 </div>
@@ -15,6 +19,7 @@
         </div>
     </transition>
 </template>
+
   
 <script>
 // UI 
@@ -26,17 +31,21 @@ export default {
         showModal() {
             return this.$store.state.showModal
         },
-        newItem() {
-            return this.$store.state.newItem
-        }
+            newItem() {
+                return this.$store.state.newItem
+            },
+            items() {
+                return this.$store.state.items
+            }
     },
     methods: {
         addItem() {
-            this.$store.dispatch('addItem')
+            this.$store.commit('addItem', { ...this.newItem })
+            this.closeModal()
         },
         closeModal() {
             this.$store.commit('setShowModal', false)
-            this.$store.commit('setNewItem', { name: '', email: '' })
+            this.$store.commit('setNewItem', { name: '', email: '', parent: null })
         }
     }
 }

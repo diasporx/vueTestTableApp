@@ -7,6 +7,7 @@
 <style scoped>
 .mainButton {
     border-radius: 5px;
+    text-transform: uppercase;
     padding: 15px 25px;
     font-weight: 700;
     font-size: 14px;
