@@ -6,10 +6,6 @@
                 <div class="d-flex flex-column mb-1">
                     <input class="mb-1" v-model="newItem.name" type="text" placeholder="Имя">
                     <input v-model="newItem.phone" type="tel" placeholder="Телефон (+7)">
-                    <!-- <select v-model="newItem.parent">
-                        <option value="">Select parent</option>
-                        <option v-for="(item, index) in items" :key="index" :value="item.name">{{ item.name }}</option>
-                    </select> -->
                 </div>
                 <div class="d-flex justify-content-between">
                     <customButton @click="addItem" class="me-1">Save</customButton>

@@ -1,10 +1,16 @@
 <template>
   <div id="app">
     <div class="container">
+
+      <!-- button  -->
       <custom-button @click="showModal = true" class="mb-3">
         Добавить пользователя
       </custom-button>
+
+      <!-- Table  -->
       <Table />
+
+      <!-- Modal  -->
       <Modal />
     </div>
   </div>
@@ -20,19 +26,11 @@ import customButton from './components/UI/buttonCustom.vue'
 
 export default {
   name: 'App',
-  components: {
-    Table,
-    Modal,
-    customButton
-  },
+  components: {Table,Modal,customButton},
   computed: {
     showModal: {
-      get() {
-        return this.$store.state.showModal
-      },
-      set(value) {
-        this.$store.commit('setShowModal', value)
-      }
+      get() {return this.$store.state.showModal},
+      set(value) {this.$store.commit('setShowModal', value)}
     }
   }
 }
