@@ -7,6 +7,10 @@
                     <input class="mb-1" v-model="newItem.name" type="text" placeholder="Имя">
                     <input v-model="newItem.phone" type="tel" placeholder="Телефон (+7)">
                 </div>
+                <select v-model="newItem.parentId" class="mb-1">
+                    <option value="">Select parent</option>
+                    <option v-for="item in items" :key="item.id" :value="item.id">{{ item.name }}</option>
+                </select>
                 <div class="d-flex justify-content-between">
                     <customButton @click="addItem" class="me-1">Save</customButton>
                     <customButton @click="closeModal">Cancel</customButton>
@@ -27,21 +31,21 @@ export default {
         showModal() {
             return this.$store.state.showModal
         },
-            newItem() {
-                return this.$store.state.newItem
-            },
-            items() {
-                return this.$store.state.items
-            }
+        newItem() {
+            return this.$store.state.newItem
+        },
+        items() {
+            return this.$store.state.items
+        }
     },
     methods: {
         addItem() {
             this.$store.commit('addItem', { ...this.newItem })
+            this.$store.commit('setNewItem', { name: '', email: '', parent: null })
             this.closeModal()
         },
         closeModal() {
             this.$store.commit('setShowModal', false)
-            this.$store.commit('setNewItem', { name: '', email: '', parent: null })
         }
     }
 }
@@ -49,7 +53,7 @@ export default {
 
 <style scoped>
 .modal {
-    position: absolute;
+    position: fixed;
     background-color: #111111b3;
     top: 0;
     left: 0;
@@ -59,7 +63,6 @@ export default {
     align-items: center;
     justify-content: center;
 }
-
 .modal .modal-content {
     background-color: #fff;
     padding: 30px 50px;

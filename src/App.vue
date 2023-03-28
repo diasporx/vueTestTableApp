@@ -1,15 +1,12 @@
 <template>
   <div id="app">
     <div class="container">
-
       <!-- button  -->
       <custom-button @click="showModal = true" class="mb-3">
         Добавить пользователя
       </custom-button>
-
       <!-- Table  -->
       <Table />
-
       <!-- Modal  -->
       <Modal />
     </div>
@@ -76,6 +73,14 @@ export default {
   padding: 70px 0;
 }
 
+.align-items-center {
+  align-items: center;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
 .justify-content-end {
   justify-content: flex-end;
 }
@@ -108,11 +113,15 @@ export default {
   margin-bottom: 30px;
 }
 
-input {
+input, select {
   padding: 15px 30px;
   border-radius: 5px;
   border: none;
   background-color: #e9e9ed;
+  width: 100%;
   outline: none !important;
+}
+select option {
+  font-weight: 700;
 }
 </style>

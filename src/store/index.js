@@ -5,32 +5,22 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        items: JSON.parse(localStorage.getItem('items')) || [],
         showModal: false,
         newItem: { name: '', phone: '' },
-        sortColumn: '',
-        sortDirection: 1
-    },
-    getters: {
-        sortedItems: state => {
-            const { items, sortColumn, sortDirection } = state
-            return [...items].sort((a, b) => {
-                const valueA = a[sortColumn]
-                const valueB = b[sortColumn]
-                return (valueA < valueB ? -1 : (valueA > valueB ? 1 : 0)) * sortDirection
-            })
-        }
+        items: JSON.parse(localStorage.getItem('items')) || [],
+        selectedParent: null
     },
     mutations: {
-        addItem: (state, item) => {
-            state.items.push(item)
-            localStorage.setItem('items', JSON.stringify(state.items))
-        },
         setShowModal: (state, value) => { state.showModal = value },
         setNewItem: (state, value) => { state.newItem = value },
-        setSort: (state, { column, direction }) => {
-            state.sortColumn = column
-            state.sortDirection = direction
+        addItem: (state, { name, phone, parentId }) => {
+            const id = String(Date.now())
+            state.items.push({ id, name, phone, parentId })
+            localStorage.setItem('items', JSON.stringify(state.items))
+        },
+        deleteItem: (state, id) => {
+            state.items = state.items.filter(item => item.id !== id)
+            localStorage.setItem('items', JSON.stringify(state.items))
         }
     },
     actions: {
@@ -38,6 +28,22 @@ export default new Vuex.Store({
             commit('addItem', { ...state.newItem })
             commit('setNewItem', { name: '', phone: '' })
             commit('setShowModal', false)
+        },
+        deleteItem: ({ commit }, id) => {
+            commit('deleteItem', id)
+        },
+        reEditTable: ({ commit, getters }, id) => {
+            const item = getters.items_users.find(item => item.id === id)
+            if (item) {
+                commit('setSelectedParent', item.name)
+                commit('setChildTable', true)
+                const filteredUsers = getters.items_users.filter(user => user.parentId === id)
+                commit('setFilteredUsers', filteredUsers)
+            }
+        },
+        initDefaultTable: ({ commit }) => {
+            commit('setSelectedParent', null)
+            commit('setFilteredUsers', [])
         }
     }
 })

@@ -6,9 +6,11 @@
 
 <style scoped>
 .mainButton {
-    border-radius: 5px;
+    border-radius: 2px;
+    max-width: min-content;
+    white-space: nowrap;
     text-transform: uppercase;
-    padding: 15px 25px;
+    padding: 10px 15px;
     font-weight: 700;
     font-size: 14px;
     border: none;
